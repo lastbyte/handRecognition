@@ -5,6 +5,9 @@ import cv2
 from sklearn.externals import joblib
 dim = [10,20,30,40]
 import time
+from gtts import gTTS
+import pyglet
+import os
 
 with open("test_paths.txt",'r') as file:
 	lines = file.readlines()
@@ -136,6 +139,15 @@ for line in lines:
 
 	result1 = cv2.resize(result1,(100,100))
 	#result2 = cv2.resize(result2,(100,100))
+	tts = gTTS(text=str(pred1), lang='en')
+	filename = 'tmp/sound.mp3'
+	tts.save(filename)
+
+	music = pyglet.media.load(filename, streaming=False)
+	music.play()
+
+	time.sleep(music.duration) #prevent from killing
+	os.remove(filename) #remove temperory file
 	cv2.imshow("predicted by knn-10 : "+str(pred1),result1)
 	#cv2.imshow("predicted by linear svm: "+str(pred2),result2)
 
