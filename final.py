@@ -58,7 +58,7 @@ for line in lines:
 			       bw_image[i][j] = 255 #Setting the skin tone to be White
 			   else:
 			       bw_image[i][j] = 0 #else setting it to zero.
-			       
+
 	###############################################################################
 
 
@@ -73,11 +73,11 @@ for line in lines:
 	# Finding the contour with the greatest area.
 	largestContourIndex = 0
 	if len(contours)<=0:
-		print "Skipping due to empty contour"		
+		print "Skipping due to empty contour"
 		continue
 	largestContourArea = cv2.contourArea(contours[largestContourIndex])
 	i=1
-	while i<len(contours): 
+	while i<len(contours):
 		  if cv2.contourArea(contours[i]) > cv2.contourArea(contours[largestContourIndex]):
 			   largestContourIndex = i
 		  i+=1
@@ -101,7 +101,7 @@ for line in lines:
 	else:
 		print "No contour found!! Skipping this image"
 		continue
-	
+
 	#cv2.imshow("centred",sign_image)
 	########################################################
 
@@ -123,14 +123,14 @@ for line in lines:
 		#predicted2 = svm.predict(temp_image)
 		knn_list.append(predicted1[0])
 		#svm_list.append(predicted2[0])
-		
+
 #		pred = predicted[0].upper()
 	pred1 = max(set(knn_list), key=knn_list.count)
 	#pred2 = max(set(svm_list), key=svm_list.count)
 
 	pred_path1 =  'sample/'+str(pred1)+'.jpg'
 	#pred_path2 =  'sample/'+str(pred2)+'.jpg'
-	
+
 	result1 = cv2.imread(pred_path1)
 	#result2 = cv2.imread(pred_path2)
 
@@ -139,7 +139,7 @@ for line in lines:
 	cv2.imshow("predicted by knn-10 : "+str(pred1),result1)
 	#cv2.imshow("predicted by linear svm: "+str(pred2),result2)
 
-	cv2.waitKey(5000)	
+	cv2.waitKey(5000)
 	#########################################################
 
 	if cv2.waitKey(1) & 0xFF == ord("q"): # Wait for a few microseconds and check if `q` is pressed.. if yes, then quit
