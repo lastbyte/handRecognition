@@ -148,5 +148,4 @@ for line in lines:
 	time.sleep(1)
 # cleanup the camera and close any open windows
 # camera.release()
-
 print "The program completed successfully !!"
